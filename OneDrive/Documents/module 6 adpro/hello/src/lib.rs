@@ -28,6 +28,14 @@ impl ThreadPool {
         }
     }
 
+    pub fn build(size: usize) -> Result<ThreadPool, &'static str> {
+        if size == 0 {
+            return Err("Pool size must be greater than zero");
+        }
+        // Panggil logika yang sama dengan new atau pindahkan logika ke sini
+        Ok(ThreadPool::new(size))
+    }
+
     pub fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
